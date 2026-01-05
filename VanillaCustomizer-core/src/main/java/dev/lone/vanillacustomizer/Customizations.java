@@ -2,18 +2,20 @@ package dev.lone.vanillacustomizer;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import dev.lone.vanillacustomizer.exception.InvalidCustomizationPropertyException;
-import org.bukkit.GameMode;
-import org.jetbrains.annotations.Nullable;
 import dev.lone.vanillacustomizer.api.VanillaCustomizerApi;
 import dev.lone.vanillacustomizer.commands.registered.MainCommand;
-import dev.lone.vanillacustomizer.customization.changes.*;
 import dev.lone.vanillacustomizer.customization.Customization;
+import dev.lone.vanillacustomizer.customization.changes.*;
 import dev.lone.vanillacustomizer.customization.matchers.RuleNbtMatcher;
 import dev.lone.vanillacustomizer.customization.rules.*;
+import dev.lone.vanillacustomizer.exception.InvalidCustomizationPropertyException;
 import dev.lone.vanillacustomizer.nms.items.Rarity;
 import dev.lone.vanillacustomizer.utils.*;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.commons.io.FileUtils;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
@@ -24,9 +26,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.*;
@@ -68,7 +68,7 @@ public class Customizations
                 ConfigurationSection rulesSection = section.getConfigurationSection("rules");
                 if (rulesSection == null)
                 {
-                    Main.msg.error("Error: Customization '" + key + "' missing 'rules'. File: " + config.getPartialFilePath());
+                    Msg.error("Error: Customization '" + key + "' missing 'rules'. File: " + config.getPartialFilePath());
                     continue;
                 }
 
@@ -84,7 +84,7 @@ public class Customizations
                                 RuleMaterialWildcards rule = new RuleMaterialWildcards();
                                 for (String noMatch : rule.init(materialWildcards))
                                 {
-                                    Main.msg.warn("Warning: 'material_wildcards' -> '" + noMatch + "' of '" + key + "' has matched 0 items. File: " + config.getPartialFilePath());
+                                    Msg.warn("Warning: 'material_wildcards' -> '" + noMatch + "' of '" + key + "' has matched 0 items. File: " + config.getPartialFilePath());
                                 }
                                 customization.addRule(rule);
                             }
@@ -95,7 +95,7 @@ public class Customizations
                                 if (material == null)
                                 {
                                     throwInvalidPropertyValue("material", matStr);
-//                                    Main.msg.error("Error: Customization '" + key + "' has invalid 'material'. File: " + config.getPartialFilePath());
+//                                    Msg.error("Error: Customization '" + key + "' has invalid 'material'. File: " + config.getPartialFilePath());
                                     break;
                                 }
 
@@ -111,7 +111,7 @@ public class Customizations
                                     if (material == null)
                                     {
                                         throwInvalidPropertyValue("material", matStr);
-//                                        Main.msg.error("Error: Customization '" + key + "' has invalid 'material'. File: " + config.getPartialFilePath());
+//                                        Msg.error("Error: Customization '" + key + "' has invalid 'material'. File: " + config.getPartialFilePath());
                                     }
                                     else
                                     {
@@ -183,18 +183,18 @@ public class Customizations
                     {
                         if(ex instanceof InvalidCustomizationPropertyException)
                         {
-                            Main.msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath());
-                            Main.msg.error(ex.getMessage());
+                            Msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath());
+                            Msg.error(ex.getMessage());
                         }
                         else
-                            Main.msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath(), ex);
+                            Msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath(), ex);
                     }
                 }
 
                 ConfigurationSection changesSection = section.getConfigurationSection("changes");
                 if (changesSection == null)
                 {
-                    Main.msg.error("Error: Customization '" + key + "' missing 'changes'. File: " + config.getPartialFilePath());
+                    Msg.error("Error: Customization '" + key + "' missing 'changes'. File: " + config.getPartialFilePath());
                     continue;
                 }
 
@@ -436,11 +436,11 @@ public class Customizations
                     {
                         if(ex instanceof InvalidCustomizationPropertyException)
                         {
-                            Main.msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath());
-                            Main.msg.error(ex.getMessage());
+                            Msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath());
+                            Msg.error(ex.getMessage());
                         }
                         else
-                            Main.msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath(), ex);
+                            Msg.error("Error loading customization '" + key + "'. File: " + config.getPartialFilePath(), ex);
                     }
                 }
 

@@ -2,9 +2,9 @@ package dev.lone.vanillacustomizer.commands.registered;
 
 import dev.lone.vanillacustomizer.Main;
 import dev.lone.vanillacustomizer.commands.CommandRun;
+import dev.lone.vanillacustomizer.utils.Msg;
 import dev.lone.vanillacustomizer.utils.SmallCaps;
 import fr.mrmicky.fastinv.FastInv;
-import org.jetbrains.annotations.NotNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,10 +44,10 @@ public class MainCommand extends CommandRun
                 case "showdebugtag":
                     boolean showdebugtag = hasDebugTag(player);
                     if (showdebugtag)
-                        Main.msg.send(player, "Disabled debug tag");
+                        Msg.message(player, "Disabled debug tag");
 
                     else
-                        Main.msg.send(player, "Enabled debug tag");
+                        Msg.message(player, "Enabled debug tag");
 
                     if (!showdebugtag)
                         player.setMetadata("showdebugtag", new FixedMetadataValue(Main.inst(), 0));
@@ -60,11 +61,11 @@ public class MainCommand extends CommandRun
                 case "small":
                     if(args.length < 2)
                     {
-                        Main.msg.send(player, "Usage: /vanillacustomizer small <text>");
+                        Msg.message(player, "Usage: /vanillacustomizer small <text>");
                         return;
                     }
                     String text = args[1];
-                    Main.msg.send(player, SmallCaps.apply(text));
+                    Msg.message(player, SmallCaps.apply(text));
                     break;
                 case "debugmenu":
 
@@ -91,7 +92,7 @@ public class MainCommand extends CommandRun
                 case "reload":
                     Main.inst().reload();
                     Bukkit.getOnlinePlayers().forEach(Player::updateInventory);
-                    Main.msg.send(player, "Reloaded configs.");
+                    Msg.message(player, "Reloaded configs.");
                     break;
             }
         }
@@ -107,7 +108,7 @@ public class MainCommand extends CommandRun
                 case "reload":
                     Main.inst().reload();
                     Bukkit.getOnlinePlayers().forEach(Player::updateInventory);
-                    Main.msg.send(sender, "Reloaded configs.");
+                    Msg.message(sender, "Reloaded configs.");
                     return;
             }
         }

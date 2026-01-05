@@ -1,6 +1,6 @@
 package dev.lone.vanillacustomizer.customization.changes;
 
-import dev.lone.LoneLibs.nbt.nbtapi.NBTItem;
+import beer.devs.fastnbt.nms.nbt.NItem;
 import dev.lone.vanillacustomizer.ChangeSession;
 
 public class ProtectNbtData implements IChange
@@ -8,9 +8,9 @@ public class ProtectNbtData implements IChange
     @Override
     public void apply(ChangeSession session)
     {
-        NBTItem nbt = session.nbtLegacy();
-        nbt.removeKey("PublicBukkitValues");
-        nbt.removeKey("itemsadder");
+        NItem nbt = session.nbt();
+        nbt.remove("PublicBukkitValues");
+        nbt.remove("itemsadder");
 
         session.saveNbt();
     }

@@ -4,7 +4,7 @@ import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.EnumWrappers;
 import com.comphenix.protocol.wrappers.Pair;
-import dev.lone.LoneLibs.chat.Msg;
+import de.tr7zw.changeme.nbtapi.NBT;
 import dev.lone.vanillacustomizer.commands.Commands;
 import dev.lone.vanillacustomizer.nms.items.ItemsNms;
 import dev.lone.vanillacustomizer.utils.Packets;
@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.sound.midi.Receiver;
 import java.util.List;
 
 public final class Main extends JavaPlugin implements Listener
@@ -29,7 +30,7 @@ public final class Main extends JavaPlugin implements Listener
     //DO NOT SET AS "final" OR SPIGOT.MC won't replace it.
     @SuppressWarnings("unused")
     public static String b = "%%__USER__%%";
-    public static Msg msg;
+    public static Receiver msg;
 
     private static Main inst;
 
@@ -45,7 +46,11 @@ public final class Main extends JavaPlugin implements Listener
     {
         inst = this;
 
-        msg = new Msg("[VanillaCustomizer] ");
+        if (!NBT.preloadApi()) {
+            getLogger().warning("NBT-API wasn't initialized properly, disabling the plugin");
+            getPluginLoader().disablePlugin(this);
+            return;
+        }
 
         Bukkit.getPluginManager().registerEvents(this, this);
 

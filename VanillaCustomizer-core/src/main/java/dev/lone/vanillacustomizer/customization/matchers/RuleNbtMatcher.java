@@ -1,8 +1,8 @@
 package dev.lone.vanillacustomizer.customization.matchers;
 
-import dev.lone.LoneLibs.nbt.nbtapi.NBTCompound;
-import dev.lone.LoneLibs.nbt.nbtapi.NBTItem;
-import dev.lone.LoneLibs.nbt.nbtapi.NBTType;
+import de.tr7zw.changeme.nbtapi.NBTCompound;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTType;
 import dev.lone.vanillacustomizer.customization.rules.IRule;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;

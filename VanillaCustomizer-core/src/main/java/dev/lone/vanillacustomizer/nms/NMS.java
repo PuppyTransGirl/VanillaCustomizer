@@ -1,9 +1,10 @@
 package dev.lone.vanillacustomizer.nms;
 
-import org.jetbrains.annotations.Nullable;
+import beer.devs.fastnbt.nms.Version;
 import dev.lone.vanillacustomizer.Main;
-import lonelibs.dev.lone.fastnbt.nms.Version;
+import dev.lone.vanillacustomizer.utils.Msg;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -12,13 +13,6 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class NMS
 {
-    public static boolean is_v1_1_20_5_or_greater;
-
-    static
-    {
-        is_v1_1_20_5_or_greater = Version.isAtLeast(Version.v1_20_5);
-    }
-
     /**
      * Gets a suitable implementaion for the current Minecraft server version.
      *
@@ -52,7 +46,7 @@ public class NMS
             if (ignoreError)
                 return null;
 
-            Main.msg.error("Error getting implementation for " + nmsHolder.getClass() + " - NMS " + nmsVersion);
+            Msg.error("Error getting implementation for " + nmsHolder.getClass() + " - NMS " + nmsVersion);
             e.printStackTrace();
 
             Bukkit.getPluginManager().disablePlugin(Main.inst());
