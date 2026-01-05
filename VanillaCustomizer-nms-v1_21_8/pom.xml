@@ -35,11 +35,34 @@
     </build>
 
 
+    <repositories>
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <id>carm-repo</id>
+            <url>https://repo.carm.cc/repository/maven-public/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>ca.bkaw</groupId>
             <artifactId>paper-nms</artifactId>
             <version>1.21.8-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.21.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>datafixerupper</artifactId>
+            <version>8.0.16</version>
             <scope>provided</scope>
         </dependency>
 
