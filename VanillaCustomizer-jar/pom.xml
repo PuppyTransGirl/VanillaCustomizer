@@ -52,13 +52,6 @@
                 <executions>
                     <execution>
                         <phase>package</phase>
-                        <configuration>
-                            <target>
-                                <!-- Copy JAR to multiple directories -->
-                                <copy file="${basedir}/../output/${project.parent.artifactId}.jar" todir="C:/Progetti/Minecraft/TestServer/1.20.6/plugins/"/>
-                                <copy file="${basedir}/../output/${project.parent.artifactId}.jar" todir="C:/Progetti/Minecraft/TestServer/1.21.1/plugins/"/>
-                            </target>
-                        </configuration>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -87,42 +80,52 @@
 
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_21_1</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>dev.lone</groupId>
             <artifactId>VanillaCustomizer-nms-v1_20_6</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_20_R3</artifactId>
+            <artifactId>VanillaCustomizer-nms-v1_21_1</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_20_R2</artifactId>
+            <artifactId>VanillaCustomizer-nms-v1_21_3</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_20_R1</artifactId>
+            <artifactId>VanillaCustomizer-nms-v1_21_4</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_19_R3</artifactId>
+            <artifactId>VanillaCustomizer-nms-v1_21_5</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_18_R2</artifactId>
+            <artifactId>VanillaCustomizer-nms-v1_21_6</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>dev.lone</groupId>
-            <artifactId>VanillaCustomizer-nms-v1_17_R1</artifactId>
+            <artifactId>VanillaCustomizer-nms-v1_21_7</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>VanillaCustomizer-nms-v1_21_8</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>VanillaCustomizer-nms-v1_21_10</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>VanillaCustomizer-nms-v1_21_11</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>

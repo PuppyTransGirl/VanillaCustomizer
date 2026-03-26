@@ -1,6 +1,6 @@
 package dev.lone.vanillacustomizer.customization.changes;
 
-import dev.lone.LoneLibs.nbt.nbtapi.NBTItem;
+import beer.devs.fastnbt.nms.nbt.NItem;
 import dev.lone.vanillacustomizer.ChangeSession;
 
 public class ReplaceCustomModelData implements IChange
@@ -15,8 +15,8 @@ public class ReplaceCustomModelData implements IChange
     @Override
     public void apply(ChangeSession session)
     {
-        NBTItem nbt = session.nbtLegacy();
-        nbt.setInteger("CustomModelData", id);
+        NItem nbt = session.nbt();
+        nbt.setInt("CustomModelData", id);
 
         session.saveNbt();
     }

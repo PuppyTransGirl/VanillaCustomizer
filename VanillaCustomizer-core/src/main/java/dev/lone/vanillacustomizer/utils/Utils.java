@@ -1,17 +1,15 @@
 package dev.lone.vanillacustomizer.utils;
 
 import com.google.gson.JsonSyntaxException;
-import dev.lone.LoneLibs.chat.Comp;
-import dev.lone.vanillacustomizer.nms.NMS;
-import lonelibs.net.kyori.adventure.text.Component;
-import lonelibs.net.kyori.adventure.text.format.TextColor;
-import lonelibs.net.kyori.adventure.text.format.TextDecoration;
-import lonelibs.org.jetbrains.annotations.NotNull;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.InventoryView;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Utils
@@ -64,12 +62,8 @@ public class Utils
             case "generic.armor_toughness" -> Attribute.GENERIC_ARMOR_TOUGHNESS;
             case "generic.luck" -> Attribute.GENERIC_LUCK;
             case "zombie.spawn_reinforcements" -> Attribute.ZOMBIE_SPAWN_REINFORCEMENTS;
-            case "horse.jump_strength" ->
-            {
-                if (NMS.is_v1_1_20_5_or_greater)
-                    yield Attribute.valueOf("HORSE_JUMP_STRENGTH");
-                yield Attribute.GENERIC_JUMP_STRENGTH;
-            }
+            case "horse.jump_strength" -> // 1.20.5+
+                    Attribute.valueOf("HORSE_JUMP_STRENGTH");
             default -> null;
         };
     }

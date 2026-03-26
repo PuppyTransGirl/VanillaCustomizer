@@ -1,8 +1,5 @@
 package dev.lone.vanillacustomizer.utils;
 
-import org.jetbrains.annotations.NotNull;
-import dev.lone.vanillacustomizer.Main;
-import dev.lone.vanillacustomizer.nms.NMS;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;
@@ -15,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -30,6 +28,11 @@ import java.util.regex.Pattern;
 /**
  * 2020-01-08 LoneDev
  */
+
+/**
+ * 2025-02-16 PSYCHEER
+ */
+
 @SuppressWarnings("unused")
 public class ConfigFile
 {
@@ -193,7 +196,7 @@ public class ConfigFile
                 //e.printStackTrace();
                 //Main.msg.sendConsoleError("ERROR LOADING file '" + filePath + "'");
                 if (announceCustomLanguage)
-                    Main.msg.log(ChatColor.YELLOW + "Using custom language file '" + filePath + "'");
+                    Msg.log(ChatColor.YELLOW + "Using custom language file '" + filePath + "'");
                 e.printStackTrace();
             }
         }
@@ -235,7 +238,7 @@ public class ConfigFile
 
     protected void notifyMissingProperty(String path)
     {
-        Main.msg.error("MISSING FILE PROPERTY! '" + path + "' in file '" + filePath + "'");
+        Msg.error("MISSING FILE PROPERTY! '" + path + "' in file '" + filePath + "'");
     }
 
     public void set(String path, Object value)
@@ -504,7 +507,7 @@ public class ConfigFile
             if (Material.valueOf(material.toUpperCase()) != null)//does this even work?
                 coloredList.add(Material.valueOf(material.toUpperCase()));
             else
-                Main.msg.error("No material found with name " + material + ". Please check config '" + filePath + "'");
+                Msg.error("No material found with name " + material + ". Please check config '" + filePath + "'");
         }
 
         return coloredList;

@@ -1,13 +1,11 @@
 package dev.lone.vanillacustomizer;
 
-import dev.lone.LoneLibs.nbt.nbtapi.NBTItem;
-import org.jetbrains.annotations.Nullable;
+import beer.devs.fastnbt.nms.nbt.NItem;
 import dev.lone.vanillacustomizer.customization.rules.RuleVanillaItemMatcher;
-import dev.lone.vanillacustomizer.nms.NMS;
-import lonelibs.dev.lone.fastnbt.nms.nbt.NItem;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.Nullable;
 
 // TODO: find a better name for this
 public class ChangeSession
@@ -18,7 +16,6 @@ public class ChangeSession
 
     public ItemMeta meta;
 
-    public NBTItem nbtLegacy;
     public NItem nbt;
 
     public final boolean isVanilla;
@@ -52,17 +49,7 @@ public class ChangeSession
 
     private void refreshNBT()
     {
-        nbtLegacy = new NBTItem(item);
-        if(NMS.is_v1_1_20_5_or_greater)
-            nbt = new NItem(item);
-    }
-
-    public NBTItem nbtLegacy()
-    {
-        if(nbtLegacy != null)
-            return nbtLegacy;
-        refreshNBT();
-        return nbtLegacy;
+        nbt = new NItem(item);
     }
 
     public NItem nbt()
