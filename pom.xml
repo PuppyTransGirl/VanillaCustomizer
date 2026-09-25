@@ -32,6 +32,9 @@
         <module>VanillaCustomizer-nms-v1_21_8</module>
         <module>VanillaCustomizer-nms-v1_21_10</module>
         <module>VanillaCustomizer-nms-v1_21_11</module>
+        <module>VanillaCustomizer-nms-v26_1_1</module>
+        <module>VanillaCustomizer-nms-v26_1_2</module>
+        <module>VanillaCustomizer-nms-v26_2</module>
         <module>VanillaCustomizer-nms-v26_3</module>
     </modules>
 
