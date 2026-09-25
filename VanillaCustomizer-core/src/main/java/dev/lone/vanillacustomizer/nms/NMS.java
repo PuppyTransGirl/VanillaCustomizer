@@ -1,18 +1,21 @@
 package dev.lone.vanillacustomizer.nms;
 
-import beer.devs.fastnbt.nms.Version;
 import dev.lone.vanillacustomizer.Main;
 import dev.lone.vanillacustomizer.utils.Msg;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utility to initialize NMS wrappers and avoid Maven circular dependency problems.
  */
 public class NMS
 {
+    private static final Pattern MINECRAFT_VERSION_PATTERN = Pattern.compile("\\(MC:\\s*([0-9]+(?:\\.[0-9]+)+)\\)");
+
     /**
      * Gets a suitable implementaion for the current Minecraft server version.
      *
@@ -26,7 +29,10 @@ public class NMS
     @SuppressWarnings("unchecked")
     public static <T> T findImplementation(@SuppressWarnings("unused") Class<T> implClazz, Object nmsHolder, boolean ignoreError)
     {
-        String nmsVersion = Version.get().name();
+        Matcher versionMatcher = MINECRAFT_VERSION_PATTERN.matcher(Bukkit.getServer().getVersion());
+        String nmsVersion = versionMatcher.find()
+                ? "v" + versionMatcher.group(1).replace('.', '_')
+                : "UNKNOWN";
 
         try
         {

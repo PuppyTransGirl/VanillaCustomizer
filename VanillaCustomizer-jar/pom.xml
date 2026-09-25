@@ -128,6 +128,11 @@
             <artifactId>VanillaCustomizer-nms-v1_21_11</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>dev.lone</groupId>
+            <artifactId>VanillaCustomizer-nms-v26_3</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>
