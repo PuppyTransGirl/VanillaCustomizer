@@ -61,6 +61,8 @@ public class Customizations
                 ConfigurationSection section = config.getConfigurationSection("customizations." + key);
                 assert section != null;
 
+                customization.ignore = section.getBoolean("ignore", false);
+
                 if(!section.getBoolean("enabled", true))
                     continue;
 
@@ -129,9 +131,12 @@ public class Customizations
                             }
                             case "nbt" ->
                             {
+                                Object value = rulesSection.get(matcherKey + ".value");
+                                if (value == null)
+                                    throwMissingProperty("nbt.value");
                                 RuleNbtMatcher nbtMatcher = new RuleNbtMatcher(
-                                        rulesSection.getString(matcherKey + ".path"),
-                                        rulesSection.getString(matcherKey + ".value"),
+                                        getStringOrThrow(rulesSection, matcherKey + ".path"),
+                                        value,
                                         rulesSection.getString(matcherKey + ".type", "string")
                                 );
                                 customization.addRule(nbtMatcher);
@@ -192,13 +197,13 @@ public class Customizations
                 }
 
                 ConfigurationSection changesSection = section.getConfigurationSection("changes");
-                if (changesSection == null)
+                if (changesSection == null && !customization.ignore)
                 {
                     Msg.error("Error: Customization '" + key + "' missing 'changes'. File: " + config.getPartialFilePath());
                     continue;
                 }
 
-                for (String changeKey : changesSection.getKeys(false))
+                for (String changeKey : changesSection == null ? Collections.<String>emptySet() : changesSection.getKeys(false))
                 {
                     try
                     {
@@ -215,6 +220,10 @@ public class Customizations
                                 String json = changesSection.getString(changeKey);
                                 customization.addChange(new RenamerJson(json));
                             }
+                            case "name_prefix", "rename_prefix" -> customization.addChange(new TextAffix(false, getStringOrThrow(changesSection, changeKey), ""));
+                            case "name_suffix", "rename_suffix" -> customization.addChange(new TextAffix(false, "", getStringOrThrow(changesSection, changeKey)));
+                            case "lore_prefix" -> customization.addChange(new TextAffix(true, getStringOrThrow(changesSection, changeKey), ""));
+                            case "lore_suffix" -> customization.addChange(new TextAffix(true, "", getStringOrThrow(changesSection, changeKey)));
                             case "replace_word_display_name" ->
                             {
                                 ConfigurationSection thisSection = changesSection.getConfigurationSection(changeKey);
@@ -488,11 +497,12 @@ public class Customizations
 
         boolean trackChanges = MainCommand.hasDebugTag(player);
         ChangeSession session = new ChangeSession(itemStack, player, trackChanges);
-        for (Map.Entry<String, Customization> entry : customizations.entrySet())
-        {
-            Customization customization = entry.getValue();
-            customization.handle(session);
-        }
+        if (isIgnored(session))
+            return;
+
+        for (Customization customization : customizations.values())
+            if (!customization.ignore)
+                customization.handle(session);
 
         // Warning! This doesn't edit the session data. Do not access use "customization" obj
         // after this line since it would result not updated with changes done by the API handlers.
@@ -509,6 +519,14 @@ public class Customizations
             if(session.refreshMeta().getPersistentDataContainer().getKeys().size() > 1)
                 LoreInsert.putLine(session, 1, " ");
         }
+    }
+
+    boolean isIgnored(ChangeSession session)
+    {
+        for (Customization customization : customizations.values())
+            if (customization.ignore && customization.matchesAll(session))
+                return true;
+        return false;
     }
 
     private static List<File> getAllYmlFiles()

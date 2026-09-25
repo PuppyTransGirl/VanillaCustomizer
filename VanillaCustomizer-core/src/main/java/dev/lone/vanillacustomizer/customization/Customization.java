@@ -18,6 +18,7 @@ public class Customization
 
     public List<IRule> rules = new ArrayList<>();
     public List<IChange> changes = new ArrayList<>();
+    public boolean ignore;
 
     public Customization(boolean ignoreInventoriesEnabled, boolean ignoreAnyCustomInventory, List<String> ignoreInventoriesByTitle)
     {
@@ -41,7 +42,7 @@ public class Customization
         changes.add(change);
     }
 
-    boolean matchesAll(ChangeSession session)
+    public boolean matchesAll(ChangeSession session)
     {
         InventoryView openInventory = session.getPlayer().getOpenInventory();
         if(ignoreInventoriesEnabled)
